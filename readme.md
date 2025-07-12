@@ -70,3 +70,23 @@ npx prisma generate
 cd tu-proyecto-principal/my-score-app
 npm install
 npm start
+
+Decisiones Técnicas Importantes
+RUT como Identificador Único: Se utiliza el RUT como identificador principal único para los usuarios en lugar de un nombre de usuario tradicional. Se asume que el RUT se almacena como una cadena de texto, sin un formato estricto (puntos o guiones) para simplificar la lógica de backend. La validación del formato del RUT se deja al frontend o a una capa de validación más avanzada.
+
+Generación Determinística de Scores: Los scores que no existen se generan basándose en un hash SHA256 del código. Esto asegura que el mismo código siempre genere el mismo score, creando un comportamiento predecible y replicable sin necesidad de intervención manual o una fuente de aleatoriedad externa para cada nuevo score.
+
+Separación de Rol de Usuario y Score: La aplicación maneja usuarios y scores como entidades separadas. Un score no está intrínsecamente ligado a un usuario específico en el modelo actual; cualquier usuario autenticado puede consultar cualquier código.
+
+Middleware de Autenticación/Autorización: Se utilizan middlewares de Express para centralizar la lógica de verificación de tokens JWT y la validación de roles, manteniendo las rutas limpias y enfocadas en su lógica de negocio.
+
+7. Problemas Conocidos o Limitaciones
+Validación de RUT: El backend no realiza una validación estricta del formato del RUT (ej. dígito verificador, puntos, guiones). Asume que el RUT proporcionado es válido en formato de cadena.
+
+Interfaz de Usuario Admin: La funcionalidad para que los administradores vean todos los scores solo está implementada en el backend (API). El frontend actual no tiene una interfaz de usuario dedicada para mostrar esta información; se requiere el uso de herramientas como curl o Postman para probarla.
+
+Manejo de Errores Frontend: El manejo de errores en el frontend es básico; solo muestra un mensaje de error general.
+
+Registro de Usuarios Frontend: Actualmente, el registro de usuarios solo se puede realizar a través de la API (por ejemplo, con curl o Postman), no hay una interfaz de usuario de registro en el frontend.
+
+No se pudo conectar correctamente el backend con la base de datos, se perdio mucho tiempo debugeando este error, y al no solucionarlo fue imposible terminar de ejecutar correctamente el proyecto.
