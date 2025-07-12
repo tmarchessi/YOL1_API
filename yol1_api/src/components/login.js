@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 
-function Login({ onLoginSuccess }) {
-  // const [username, setUsername] = useState(''); // ANTES
-  const [rut, setRut] = useState(''); // AHORA: Estado para el RUT
+const Login = ({ onLoginSuccess }) => {
+  const [rut, setRut] = useState(''); 
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
@@ -15,8 +14,7 @@ function Login({ onLoginSuccess }) {
         headers: {
           'Content-Type': 'application/json',
         },
-        // body: JSON.stringify({ username, password }), // ANTES
-        body: JSON.stringify({ rut, password }), // AHORA: Envía 'rut'
+        body: JSON.stringify({ rut, password }), 
       });
 
       if (!response.ok) {
@@ -37,13 +35,11 @@ function Login({ onLoginSuccess }) {
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>RUT:</label> {/* CAMBIADO: Etiqueta para RUT */}
+          <label>RUT:</label>
           <input
             type="text"
-            // value={username} // ANTES
-            // onChange={(e) => setUsername(e.target.value)} // ANTES
-            value={rut} // AHORA
-            onChange={(e) => setRut(e.target.value)} // AHORA
+            value={rut}
+            onChange={(e) => setRut(e.target.value)} 
             required
           />
         </div>
