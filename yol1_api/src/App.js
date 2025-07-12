@@ -22,7 +22,7 @@ const App = () => {
 
   return (
     <div style={{ padding: '20px', maxWidth: '600px', margin: 'auto', border: '1px solid #ccc', borderRadius: '8px' }}>
-      <h1>Score Application</h1>
+      <h1>Score App</h1>
       {isLoggedIn ? (
         <ScoreView onLogout={handleLogout} />
       ) : (
